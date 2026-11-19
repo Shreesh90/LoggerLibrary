@@ -8,8 +8,6 @@ import org.example.sinks.DBSink;
 import org.example.utils.LogLevel;
 import org.example.utils.SinkType;
 
-import java.util.UUID;
-
 public class Main {
     public static void main(String[] args) {
         // multiple sink, each tied to different log levels
@@ -31,16 +29,15 @@ public class Main {
         // client only calls the log level, namespace and message
         Logger logger = new Logger(loggerConfiguration);
 
-        // no trackingId set yet -> logged as "-"
         logger.log(LogLevel.DEBUG, "1", "debug message");
-        logger.log(LogLevel.INFO, "2", "Empty txnIds Nothing to fetch");
-        logger.log(LogLevel.WARN, "3", "No user found for the phone number");
-        logger.log(LogLevel.ERROR, "4", "Payment gateway timed out");
-        logger.log(LogLevel.FATAL, "5", "Connection pool exhausted");
+        logger.log(LogLevel.INFO, "2", "Just a Info message");
+        logger.log(LogLevel.WARN, "3", "No user found");
+        logger.log(LogLevel.ERROR, "4", "Error in fetching credss");
+        logger.log(LogLevel.FATAL, "5", "fatal error!!!");
 
         // read the DB Sink List
         for (LoggerMessage row : ((DBSink) dbSink).getLogs()) {
-            System.out.println("DB row -> " + new LogFormatter().format(row));
+            System.out.println("DB row: " + new LogFormatter().format(row));
         }
     }
 }

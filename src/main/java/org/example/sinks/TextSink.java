@@ -28,7 +28,7 @@ public class TextSink implements Sink {
     }
 
     @Override
-    public synchronized void log(LoggerMessage loggerMessage) {
+    public void log(LoggerMessage loggerMessage) {
         String line = logFormatter.format(loggerMessage) + System.lineSeparator();
         try {
             Files.createDirectories(logFile.toAbsolutePath().getParent());

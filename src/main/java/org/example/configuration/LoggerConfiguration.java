@@ -16,15 +16,15 @@ public class LoggerConfiguration {
         this.dateTimeFormat = dateTimeFormat;
     }
 
-    public String getDateTimeFormat() {
-        return dateTimeFormat;
-    }
-
     public LoggerConfiguration addSink(Sink sink, LogLevel... levels) {
         for (LogLevel level : levels) {
             sinkByLogLevel.put(level, sink);
         }
         return this;
+    }
+
+    public String getDateTimeFormat() {
+        return dateTimeFormat;
     }
 
     public Sink getSink(LogLevel level) {

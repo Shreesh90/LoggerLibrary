@@ -5,7 +5,6 @@ import org.example.interfaces.Sink;
 import org.example.interfaces.SinkConfiguration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DBSink implements Sink {
@@ -21,12 +20,12 @@ public class DBSink implements Sink {
     }
 
     @Override
-    public synchronized void log(LoggerMessage message) {
+    public void log(LoggerMessage message) {
         logs.add(message);
     }
 
     // specific to dbSink as we are not printing the logs anywhere, for the client to get logs
-    public synchronized List<LoggerMessage> getLogs() {
+    public List<LoggerMessage> getLogs() {
         return new ArrayList<>(logs);
     }
 }

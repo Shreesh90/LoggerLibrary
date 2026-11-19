@@ -15,7 +15,7 @@ public class Logger {
     private final LoggerConfiguration loggerConfiguration;
     private final DateTimeFormatter formatter;
     // hostName (extension)
-    private final String hostName="host-1";
+    private final String hostName="us-host-1";
 
     public Logger(LoggerConfiguration loggerConfiguration) {
         this.loggerConfiguration = loggerConfiguration;
