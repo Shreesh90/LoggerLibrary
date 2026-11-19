@@ -18,9 +18,8 @@ public class Main {
         // in-memory DB sink (stores messages in a List) (requirement)
         Sink dbSink = SinkFactory.getSink(SinkType.DB, new DBSinkConfiguration("locahost", "8080"));
 
-        // we defined multiple sinks above, now defining what log level wach sink handles
         // one or more message level can have the same sink (requirement)
-        // A message level is tied to a sink. (requirement) [each log level has only one sink corresponding to it]
+        // A message level is tied to a sink. (requirement)
         LoggerConfiguration loggerConfiguration = new LoggerConfiguration("dd-MM-yyyy HH:mm:ss")
                 .addSink(sink1, LogLevel.DEBUG, LogLevel.INFO, LogLevel.WARN)
                 .addSink(sink2, LogLevel.ERROR)
@@ -29,6 +28,8 @@ public class Main {
         // client only calls the log level, namespace and message
         Logger logger = new Logger(loggerConfiguration);
 
+        // Sink not being sent while sending the message to the library (requirement)
+        // You specify message content, level and namespace while sending a message (requirement)
         logger.log(LogLevel.DEBUG, "1", "debug message");
         logger.log(LogLevel.INFO, "2", "Just a Info message");
         logger.log(LogLevel.WARN, "3", "No user found");

@@ -1,6 +1,5 @@
-DEBUG [19-11-2026 21:33:31, 1] [host=host-1] debug message
-INFO [19-11-2026 21:33:31, 2] [host=host-1] Empty txnIds Nothing to fetch
-WARN [19-11-2026 21:33:31, 3] [host=host-1] No user found for the phone number
-DEBUG [19-11-2026 21:42:21, 1] [host=us-host-1] debug message
-INFO [19-11-2026 21:42:21, 2] [host=us-host-1] Empty txnIds Nothing to fetch
-WARN [19-11-2026 21:42:21, 3] [host=us-host-1] No user found for the phone number
+INFO [19-11-2026 21:51:13, 2] [host=us-host-1] Just a Info message
+WARN [19-11-2026 21:51:13, 3] [host=us-host-1] No user found
+DEBUG [19-11-2026 21:51:23, 1] [host=us-host-1] debug message
+INFO [19-11-2026 21:51:23, 2] [host=us-host-1] Just a Info message
+WARN [19-11-2026 21:51:23, 3] [host=us-host-1] No user found
