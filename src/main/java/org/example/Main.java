@@ -13,9 +13,9 @@ public class Main {
         textSinkConfiguration.setFile_location("");
 
         LoggerConfiguration loggerConfiguration =
-                new LoggerConfiguration("dd-MM-yyyy HH:mm:ss", LogLevel.DEBUG, SinkType.TEXT, textSinkConfiguration);
+                new LoggerConfiguration("dd-MM-yyyy HH:mm:ss", SinkType.TEXT, textSinkConfiguration);
 
         Logger logger = new Logger(loggerConfiguration);
-        logger.log("Hello");
+        logger.log(LogLevel.INFO, "334", "hello logger");
     }
 }
