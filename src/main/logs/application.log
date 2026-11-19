@@ -1,12 +1,9 @@
-DEBUG [19-11-2026 19:53:42, startup] debug message
-INFO [19-11-2026 19:53:42, payments] Empty txnIds Nothing to fetch
-WARN [19-11-2026 19:53:42, users] No user found for the phone number
-DEBUG [19-11-2026 20:20:40, startup] debug message
-INFO [19-11-2026 20:20:40, payments] Empty txnIds Nothing to fetch
-WARN [19-11-2026 20:20:40, users] No user found for the phone number
-DEBUG [19-11-2026 20:21:34, startup] debug message
-INFO [19-11-2026 20:21:34, payments] Empty txnIds Nothing to fetch
-WARN [19-11-2026 20:21:34, users] No user found for the phone number
-DEBUG [19-11-2026 20:23:15, startup] debug message
-INFO [19-11-2026 20:23:15, payments] Empty txnIds Nothing to fetch
-WARN [19-11-2026 20:23:15, users] No user found for the phone number
+DEBUG [19-11-2026 20:49:03, startup] debug message
+INFO [19-11-2026 20:49:03, payments] Empty txnIds Nothing to fetch
+WARN [19-11-2026 20:49:03, users] No user found for the phone number
+DEBUG [19-11-2026 20:50:22, startup] debug message
+INFO [19-11-2026 20:50:22, payments] Empty txnIds Nothing to fetch
+WARN [19-11-2026 20:50:22, users] No user found for the phone number
+DEBUG [19-11-2026 20:50:42, 1] debug message
+INFO [19-11-2026 20:50:42, 2] Empty txnIds Nothing to fetch
+WARN [19-11-2026 20:50:42, 3] No user found for the phone number

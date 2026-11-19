@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         // multiple sink, each tied to different log levels
         // DB sink not implemented so created two sinks for text itself.
+        // Added file limit so we can rotate the log files when its size reached the limit added here
         Sink sink1 = SinkFactory.getSink(SinkType.TEXT,  new TextSinkConfiguration("src/main/logs/application.log"));
         Sink sink2 = SinkFactory.getSink(SinkType.TEXT,  new TextSinkConfiguration("src/main/logs/error.log"));
 
@@ -23,10 +24,10 @@ public class Main {
 
         // client only calls the log level, namespace and message
         Logger logger = new Logger(loggerConfiguration);
-        logger.log(LogLevel.DEBUG, "startup", "debug message");
-        logger.log(LogLevel.INFO, "payments", "Empty txnIds Nothing to fetch");
-        logger.log(LogLevel.WARN, "users", "No user found for the phone number");
-        logger.log(LogLevel.ERROR, "payments", "Payment gateway timed out");
-        logger.log(LogLevel.FATAL, "db", "Connection pool exhausted");
+        logger.log(LogLevel.DEBUG, "1", "debug message");
+        logger.log(LogLevel.INFO, "2", "Empty txnIds Nothing to fetch");
+        logger.log(LogLevel.WARN, "3", "No user found for the phone number");
+        logger.log(LogLevel.ERROR, "4", "Payment gateway timed out");
+        logger.log(LogLevel.FATAL, "5", "Connection pool exhausted");
     }
 }
