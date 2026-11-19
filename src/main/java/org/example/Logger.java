@@ -4,13 +4,18 @@ import org.example.configuration.LoggerConfiguration;
 import org.example.interfaces.Sink;
 import org.example.utils.LogLevel;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Logger {
     private final LoggerConfiguration loggerConfiguration;
     private final DateTimeFormatter formatter;
+    // hostName (extension)
+    private final String hostName="host-1";
 
     public Logger(LoggerConfiguration loggerConfiguration) {
         this.loggerConfiguration = loggerConfiguration;
@@ -33,7 +38,8 @@ public class Logger {
                 now.format(formatter), // We format the date-time here itself, as soon as the logs come
                 logLevel,
                 message,
-                namespace
+                namespace,
+                hostName
         );
         sink.log(loggerMessage);
     }

@@ -1,9 +1,3 @@
-DEBUG [19-11-2026 20:49:03, startup] debug message
-INFO [19-11-2026 20:49:03, payments] Empty txnIds Nothing to fetch
-WARN [19-11-2026 20:49:03, users] No user found for the phone number
-DEBUG [19-11-2026 20:50:22, startup] debug message
-INFO [19-11-2026 20:50:22, payments] Empty txnIds Nothing to fetch
-WARN [19-11-2026 20:50:22, users] No user found for the phone number
-DEBUG [19-11-2026 20:50:42, 1] debug message
-INFO [19-11-2026 20:50:42, 2] Empty txnIds Nothing to fetch
-WARN [19-11-2026 20:50:42, 3] No user found for the phone number
+DEBUG [19-11-2026 21:33:31, 1] [host=host-1] debug message
+INFO [19-11-2026 21:33:31, 2] [host=host-1] Empty txnIds Nothing to fetch
+WARN [19-11-2026 21:33:31, 3] [host=host-1] No user found for the phone number

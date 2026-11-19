@@ -8,11 +8,15 @@ public class LoggerMessage {
     public LogLevel logLevel;
     public String namespace;
     public String message;
+    // hostname (Extensions)
+    public String hostName;
 
-    public LoggerMessage(String dateTimeFormat, LogLevel logLevel, String message, String namespace) {
+    public LoggerMessage(String dateTimeFormat, LogLevel logLevel, String message, String namespace,
+                         String hostName) {
         this.dateTimeFormat = dateTimeFormat;
         this.logLevel = logLevel;
         this.message = message;
         this.namespace = namespace;
+        this.hostName = hostName;
     }
 }

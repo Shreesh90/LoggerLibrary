@@ -17,7 +17,7 @@ public class TextSink implements Sink {
     private final Path logFile;
     LogFormatter logFormatter;
 
-    // ROTATION: handles "file too big -> compress it and start a new one".
+    // utility class to compress log files
     private final FileRotator fileRotator;
 
     public TextSink(SinkConfiguration textSinkConfiguration) {
@@ -28,12 +28,11 @@ public class TextSink implements Sink {
     }
 
     @Override
-    public void log(LoggerMessage loggerMessage) {
+    public synchronized void log(LoggerMessage loggerMessage) {
         String line = logFormatter.format(loggerMessage) + System.lineSeparator();
         try {
             Files.createDirectories(logFile.toAbsolutePath().getParent());
 
-            // ROTATION: size check uses bytes (not characters), since file size is in bytes.
             long lineSizeInBytes = line.getBytes(StandardCharsets.UTF_8).length;
             if (fileRotator.shouldRotate(logFile, lineSizeInBytes)) {
                 fileRotator.rotate(logFile);
