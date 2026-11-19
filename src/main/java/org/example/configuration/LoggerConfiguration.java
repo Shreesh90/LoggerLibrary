@@ -1,32 +1,33 @@
 package org.example.configuration;
 
-import org.example.sinks.TextSink;
 import org.example.interfaces.Sink;
-import org.example.interfaces.SinkConfiguration;
-import org.example.sinks.DBSink;
-import org.example.utils.SinkType;
+import org.example.utils.LogLevel;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 public class LoggerConfiguration {
-    private String dateTimeFormat;
-    private SinkType sinkType;
-    private SinkConfiguration sinkConfiguration;
+    private final String dateTimeFormat;
 
+    // Sink is tied to one or more message level (document requirement)
+    private final Map<LogLevel, Sink> sinkByLogLevel = new EnumMap<>(LogLevel.class);
 
-    public LoggerConfiguration(String dateTimeFormat, SinkType sinkType, SinkConfiguration sinkConfiguration) {
+    public LoggerConfiguration(String dateTimeFormat) {
         this.dateTimeFormat = dateTimeFormat;
-        this.sinkType = sinkType;
-        this.sinkConfiguration = sinkConfiguration;
     }
 
     public String getDateTimeFormat() {
         return dateTimeFormat;
     }
 
-    public Sink getSink() throws Exception {
-        return switch (sinkType) {
-            case TEXT -> new TextSink(sinkConfiguration);
-            case DB -> new DBSink(sinkConfiguration);
-            default -> throw new Exception("Sink not supported");
-        };
+    public LoggerConfiguration addSink(Sink sink, LogLevel... levels) {
+        for (LogLevel level : levels) {
+            sinkByLogLevel.put(level, sink);
+        }
+        return this;
+    }
+
+    public Sink getSink(LogLevel level) {
+        return sinkByLogLevel.get(level);
     }
 }
