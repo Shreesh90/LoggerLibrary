@@ -1,10 +1,8 @@
 package org.example;
 
+// (Extension 4) Formatter is now an interface -> pluggable (Strategy pattern)
 // Keeping formatter separate from how data is stored (Single Responsibility)
-public class LogFormatter {
-    public String format(LoggerMessage loggerMessage) {
-        return  loggerMessage.logLevel + " [" + loggerMessage.dateTimeFormat + ", " + loggerMessage.namespace  + "]"
-                + " [host=" + loggerMessage.hostName + "] "
-                + loggerMessage.message;
-    }
+// Implementations: formatters.PlainFormatter, formatters.JsonFormatter
+public interface LogFormatter {
+    String format(LoggerMessage loggerMessage);
 }
