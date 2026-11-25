@@ -3,29 +3,20 @@ package org.example;
 import org.example.configuration.LoggerConfiguration;
 import org.example.interfaces.Sink;
 import org.example.utils.LogLevel;
-import org.example.utils.LogMode;
 
 import java.time.Instant;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Logger {
     private final LoggerConfiguration loggerConfiguration;
     // hostName (extension)
     private final String hostName="us-host-1";
 
-    // (Extension 2) only created in ASYNC mode.
-    // Single thread executor -> logs are written in the SAME order they were submitted,
-    // and only one thread touches the sinks (sink locks still protect SYNC callers).
-    private final ExecutorService executor;
+    // (Extension 2) Logger has NO threading logic. Sync vs async is decided per sink by the
+    // client: a plain sink is sync, a sink wrapped in AsyncSink is async (Decorator pattern).
 
     public Logger(LoggerConfiguration loggerConfiguration) {
         this.loggerConfiguration = loggerConfiguration;
-        this.executor = loggerConfiguration.getLogMode() == LogMode.ASYNC
-                ? Executors.newSingleThreadExecutor()
-                : null;
     }
 
     public void log(LogLevel logLevel, String namespace, String message) {
@@ -49,31 +40,20 @@ public class Logger {
                 message,
                 namespace,
                 hostName,
-                // (Extension 5) read from caller's ThreadLocal NOW - the executor thread
-                // has its own (empty) ThreadLocal, so reading it inside the task would give null
+                // (Extension 5) read from caller's ThreadLocal NOW - an AsyncSink's worker thread
+                // has its own (empty) ThreadLocal, so reading it there would give null
                 CorrelationContext.get()
         );
 
-        // (Extension 2) sync vs async
-        if (executor == null) {
-            sink.log(loggerMessage);                     // SYNC: caller thread writes
-        } else {
-            executor.submit(() -> sink.log(loggerMessage)); // ASYNC: queued, caller returns immediately
-        }
+        // (Extension 2) same call for both: a sync sink writes now, an AsyncSink just queues it
+        sink.log(loggerMessage);
     }
 
-    // (Extension 2) client must call this on app shutdown in ASYNC mode,
-    // otherwise messages still in the queue can be lost
+    // (Extension 2) client calls this on app shutdown: closes every sink once.
+    // For an AsyncSink this flushes its queue, so no logs are lost.
     public void shutdown() {
-        if (executor == null) return;
-        executor.shutdown(); // stop accepting new logs, finish queued ones
-        try {
-            if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
-                executor.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            executor.shutdownNow();
-            Thread.currentThread().interrupt();
+        for (Sink sink : loggerConfiguration.getAllSinks()) {
+            sink.close();
         }
     }
 }

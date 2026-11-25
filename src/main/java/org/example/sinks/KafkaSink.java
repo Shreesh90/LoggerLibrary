@@ -7,7 +7,7 @@ import org.example.interfaces.Sink;
 import org.example.interfaces.SinkConfiguration;
 
 // (Extension 3) A brand new sink added WITHOUT touching SinkFactory.
-// It only implements Sink; the client registers it with SinkFactory.register(...)
+// It only implements Sink; its KafkaSinkConfiguration (a CustomSinkConfiguration) builds it
 public class KafkaSink implements Sink {
     private final KafkaSinkConfiguration config;
     private final LogFormatter logFormatter;
